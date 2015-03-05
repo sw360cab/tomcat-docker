@@ -1,0 +1,8 @@
+tomcat:
+  build: .
+  ports:
+    - "8080:8080"
+# hostname: docker-tomcat
+# volumes:
+#    - file/webapp.war:/opt/tomcat/webapps/webapp.war
+ 

@@ -1,0 +1,31 @@
+FROM sw360cab/java6-docker
+MAINTAINER Sergio Matone
+
+#Start with official /etc/apt/sources.list
+ADD file/sources.list /etc/apt/sources.list
+
+# Add Tomcat6 user/group to Map SHARED Folder correctly
+RUN addgroup --gid 127 tomcat6 &&
+  adduser --system --uid=119 --gid=127 \
+    --home /usr/share/tomcat6 --shell /bin/false tomcat6
+
+# Install Tomcat
+RUN apt-get update && apt-get -y install tomcat6 tomcat6-admin \
+  && chown tomcat6:tomcat6 /var/lib/tomcat6 /usr/share/tomcat6 -R
+  
+# Expose tomcat
+EXPOSE 8080
+
+COPY file/tomcat6 /etc/default/tomcat6
+COPY file/tomcat6/tomcat-users.xml /etc/tomcat/
+
+ENV JAVA_HOME /usr/lib/jvm/java-6-oracle
+ENV CATALINA_BASE /var/lib/tomcat6
+ENV CATALINA_HOME /usr/share/tomcat6
+ENV TOMCAT6_USER tomcat6
+ENV TOMCAT6_GROUP tomcat6
+ENV JAVA_OPTS -server -XX:+DisableExplicitGC -XX:+UseParallelGC -Xms1G -Xmx2G -XX:PermSize=1G -XX:MaxPermSize=2G
+
+USER tomcat6
+WORKDIR /var/lib/tomcat6/
+CMD ["/usr/share/tomcat6/bin/catalina.sh","run"]
