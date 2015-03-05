@@ -58,4 +58,4 @@ Stopping or removing running container:
 
 ##Credits
 
-[giuseppevavala](https://github.com/sw360cab): for pair programming and for being a good friend
+[giuseppevavala](https://github.com/giuseppevavala): for pair programming and for being a good friend
