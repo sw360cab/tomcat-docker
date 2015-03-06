@@ -2,7 +2,7 @@
 #Dockerized Tomcat
 
 A simple dockerfile that show how to create a minimal version of Tomcat7 using Java7.
-It downloads Tomcat7 from Apache website and place it under /opt/tomcat folder
+It downloads Tomcat7 from Apache website and places it under /opt/tomcat folder
 
 **WARNING!**
 Dockerfile.tomcat6 is an alternative, it is provided to install Tomcat6. To show the power of docker this is radically different form Tomcat7 Dockerfile.
@@ -38,23 +38,23 @@ Build & Run:
 Building:
 
     [docker-compose] docker-compose build
-    [traditional] sudo docker build -t tomcat .
+    [traditional] docker build -t tomcat .
 
 Running:
 
-    [docker-compose] docker-compose run -d
-    [traditional] sudo docker run -v <webapp_local_path>:/opt/tomcat/webapps/webapp.war -p 8080:8080 --name tomcat1 tomcat
+    [docker-compose] docker-compose run -d tomcat
+    [traditional] docker run -v <webapp_local_path>:/opt/tomcat/webapps/webapp.war -p 8080:8080 --name tomcat1 tomcat
 
 Running (con bash interattiva):
 
-    [docker-compose] docker-compose run
-    [traditional] sudo docker run -v <webapp_local_path>:/opt/tomcat/webapps/webapp.war -p 8080:8080 --name tomcat1 -i -t tomcat /bin/bash
+    [docker-compose] docker-compose run tomcat
+    [traditional] docker run -v <webapp_local_path>:/opt/tomcat/webapps/webapp.war -p 8080:8080 --name tomcat1 -i -t tomcat /bin/bash
     
 Stopping or removing running container:
 
     [docker-compose] docker-compose stop
-    [docker-compose] docker-compose kill        
-    [traditional] sudo docker rm -f tomcat1
+    [docker-compose] docker-compose rm --force        
+    [traditional] docker rm -f tomcat1
 
 ##Credits
 
